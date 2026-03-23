@@ -1,0 +1,14 @@
+build/
+*.o
+*.obj
+*.exe
+*.a
+*.lib
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles/
+compile_commands.json
+carddemo-ui/node_modules/
+carddemo-ui/dist/
+test_output.txt
+checkpoints/
