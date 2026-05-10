@@ -79,7 +79,7 @@ void SqlContext::execute_on_db(const std::string& sql, const std::vector<SqlValu
                         row.values.emplace_back();
                         break;
                     case SQLITE_INTEGER:
-                        row.values.emplace_back(SqlValue(sqlite3_column_int64(stmt, i)));
+                        row.values.emplace_back(SqlValue(static_cast<int64_t>(sqlite3_column_int64(stmt, i))));
                         break;
                     case SQLITE_FLOAT:
                         row.values.emplace_back(SqlValue(sqlite3_column_double(stmt, i)));

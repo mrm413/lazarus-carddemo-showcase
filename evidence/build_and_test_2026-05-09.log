@@ -1,0 +1,61 @@
+=== Installing build deps ===
+g++:    g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+cmake:  cmake version 3.28.3
+
+=== Configuring with cmake ===
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/build
+
+=== Building (parallel=4) ===
+[ 65%] Building CXX object CMakeFiles/carddemo.dir/programs/COCRDSLC_hardened.cpp.o
+[ 67%] Building CXX object CMakeFiles/carddemo.dir/programs/COCRDUPC_hardened.cpp.o
+[ 68%] Building CXX object CMakeFiles/carddemo.dir/programs/CODATE01_hardened.cpp.o
+[ 70%] Building CXX object CMakeFiles/carddemo.dir/programs/COMEN01C_hardened.cpp.o
+[ 71%] Building CXX object CMakeFiles/carddemo.dir/programs/COPAUA0C_hardened.cpp.o
+[ 73%] Building CXX object CMakeFiles/carddemo.dir/programs/COPAUS0C_hardened.cpp.o
+[ 74%] Building CXX object CMakeFiles/carddemo.dir/programs/COPAUS1C_hardened.cpp.o
+[ 76%] Building CXX object CMakeFiles/carddemo.dir/programs/COPAUS2C_hardened.cpp.o
+[ 77%] Building CXX object CMakeFiles/carddemo.dir/programs/CORPT00C_hardened.cpp.o
+[ 79%] Building CXX object CMakeFiles/carddemo.dir/programs/COSGN00C_hardened.cpp.o
+[ 80%] Building CXX object CMakeFiles/carddemo.dir/programs/COTRN00C_hardened.cpp.o
+[ 82%] Building CXX object CMakeFiles/carddemo.dir/programs/COTRN01C_hardened.cpp.o
+[ 83%] Building CXX object CMakeFiles/carddemo.dir/programs/COTRN02C_hardened.cpp.o
+[ 85%] Building CXX object CMakeFiles/carddemo.dir/programs/COTRTLIC_hardened.cpp.o
+[ 86%] Building CXX object CMakeFiles/carddemo.dir/programs/COTRTUPC_hardened.cpp.o
+[ 88%] Building CXX object CMakeFiles/carddemo.dir/programs/COUSR00C_hardened.cpp.o
+[ 89%] Building CXX object CMakeFiles/carddemo.dir/programs/COUSR01C_hardened.cpp.o
+[ 91%] Building CXX object CMakeFiles/carddemo.dir/programs/COUSR02C_hardened.cpp.o
+[ 92%] Building CXX object CMakeFiles/carddemo.dir/programs/COUSR03C_hardened.cpp.o
+[ 94%] Building CXX object CMakeFiles/carddemo.dir/programs/CSUTLDTC_hardened.cpp.o
+[ 95%] Building CXX object CMakeFiles/carddemo.dir/programs/DBUNLDGS_hardened.cpp.o
+[ 97%] Building CXX object CMakeFiles/carddemo.dir/programs/PAUDBLOD_hardened.cpp.o
+[ 98%] Building CXX object CMakeFiles/carddemo.dir/programs/PAUDBUNL_hardened.cpp.o
+[100%] Linking CXX executable carddemo
+[100%] Built target carddemo
+Build elapsed: 30s
+
+=== Build artifacts ===
+-rwxr-xr-x 1 root root 5417864 May 10 00:03 /tmp/build/carddemo
+-rwxr-xr-x 1 root root 3495072 May 10 00:03 /tmp/build/cobol-runtime/cobol-runtime-tests
+
+=== Running test suite ===
+===============================================================================
+[doctest] test cases: 189 | 189 passed | 0 failed | 0 skipped
+[doctest] assertions: 476 | 476 passed | 0 failed |
+[doctest] Status: SUCCESS!
+
+=== Just the doctest summary line ===
+[doctest] test cases: 189 | 189 passed | 0 failed | 0 skipped
+[doctest] assertions: 476 | 476 passed | 0 failed |
+
+=== ctest ===
+Test project /tmp/build
+No tests were found!!!

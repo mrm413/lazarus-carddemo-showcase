@@ -23,15 +23,18 @@ Lazarus is a proprietary transpilation engine built by [Torsova LLC](https://laz
 
 ---
 
-## Status (as of 2026-04-21)
+## Status (verified 2026-05-09 in fresh ubuntu:24.04 + g++ 13.3 + cmake 3.28)
 
 | Claim | Number | What's measured |
 |-------|-------:|-----------------|
 | COBOL programs transpiled | **44 / 44** | Every CardDemo program produces a `_hardened.cpp` output |
-| C++17 programs that compile | **44 / 44** | All compile clean under `-std=c++17 -Wall -Wextra -Wpedantic` |
+| C++17 programs that compile + link | **44 / 44** | `carddemo` executable builds clean (5.4 MB binary) |
 | CICS runtime unit tests | **107 / 107** | doctest assertions across BMS, CICS, decimal, fixed-string, safe-int, SQL, VSAM |
-| Integration tests | **82 / 82** | End-to-end transaction-loop tests including session, TRANSID routing, screen I/O |
-| Total assertions | **476 / 476** | |
+| Integration tests | **82 / 82** | End-to-end transaction-loop tests: session, TRANSID routing, screen I/O |
+| Test cases (total) | **189 / 189** | `[doctest] Status: SUCCESS!` |
+| Assertions (total) | **476 / 476** | |
+| Build elapsed | 30 s | Parallel build, 4 jobs |
+| Raw build + test log | [`evidence/build_and_test_2026-05-09.log`](evidence/build_and_test_2026-05-09.log) | Full Docker run, 61 lines |
 
 What this repo **does not** claim:
 - It does **not** claim runtime parity against a live mainframe CICS region. CardDemo is AWS's reference application; there is no IBM-mainframe oracle to diff against.
@@ -90,19 +93,32 @@ The web UI connects to the CardDemo server at `localhost:8270` and provides a fu
 
 ## How to Verify
 
-```bash
-# Compile every transpiled program
-cd programs
-for prog in *_hardened.cpp; do
-    g++ -std=c++17 -Wall -Wextra -Wpedantic -O2 -c "$prog" -o /dev/null \
-        && echo "OK: $prog" \
-        || echo "FAIL: $prog"
-done | tee compile_log.txt
-grep -c "^OK:"  compile_log.txt   # should be 44
+### Local build (CMake + g++ on host)
 
-# Run runtime tests with verbose output
-./build/cobol-runtime/cobol-runtime-tests --reporters=console --duration=true
-# Expected: 189 test cases, 476 assertions, 0 failures
+```bash
+cmake -B build
+cmake --build build --parallel 4
+./build/cobol-runtime/cobol-runtime-tests --reporters=console --no-intro=true
+# Expected: [doctest] test cases: 189 | 189 passed | 0 failed | 0 skipped
+#           [doctest] assertions: 476 | 476 passed | 0 failed |
+```
+
+### Docker reproducer (matches `evidence/build_and_test_2026-05-09.log`)
+
+```bash
+docker run --rm -v "$(pwd):/work" -w /work ubuntu:24.04 bash -c '
+apt-get update -qq && apt-get install -y --no-install-recommends g++ make cmake >/dev/null
+cmake -B /tmp/build -S /work
+cmake --build /tmp/build --parallel 4
+/tmp/build/cobol-runtime/cobol-runtime-tests --reporters=console --no-intro=true
+'
+```
+
+Expected output ends with:
+```
+[doctest] test cases: 189 | 189 passed | 0 failed | 0 skipped
+[doctest] assertions: 476 | 476 passed | 0 failed |
+[doctest] Status: SUCCESS!
 ```
 
 ---
